@@ -1,0 +1,9 @@
+{
+	"name": "dfmonthrevenue",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "63992fe1-767e-4f53-bed3-94fb54cd5637",
+		"tenantId": "82b77e21-93f5-4c79-ac64-9a6f537458c5"
+	}
+}

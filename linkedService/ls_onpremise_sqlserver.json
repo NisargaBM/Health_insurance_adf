@@ -1,0 +1,17 @@
+{
+	"name": "ls_onpremise_sqlserver",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=DESKTOP-HEEN5CT;initial catalog=H_Insurance",
+			"userName": "DESKTOP-HEEN5CT\\WELCOME",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI4MGY5YmE4Mi05MmIyLTQ5YjEtYjRhZi04ZTk4MzJkZmNkZTMiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "selfhostedonpremIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
