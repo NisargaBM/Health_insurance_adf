@@ -1,0 +1,23 @@
+{
+	"name": "SqlServerTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onpremise_sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_facttable": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"table": {
+				"value": "@dataset().p_facttable",
+				"type": "Expression"
+			}
+		}
+	}
+}
