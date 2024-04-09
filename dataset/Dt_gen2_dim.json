@@ -1,0 +1,32 @@
+{
+	"name": "Dt_gen2_dim",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_nisarga_project_adlsgen2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_dt_filename": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().p_dt_filename",
+					"type": "Expression"
+				},
+				"folderPath": "DIMF",
+				"fileSystem": "inputbackup"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": ""
+		},
+		"schema": []
+	}
+}

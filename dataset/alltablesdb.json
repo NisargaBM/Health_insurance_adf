@@ -1,0 +1,21 @@
+{
+	"name": "alltablesdb",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onpremise_sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "TableName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TableNames"
+		}
+	}
+}
