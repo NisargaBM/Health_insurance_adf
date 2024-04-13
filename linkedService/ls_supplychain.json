@@ -1,0 +1,16 @@
+{
+	"name": "ls_supplychain",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=snisarga;initial catalog=\"nisarga_adf_project \";user id=nisarga",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiODMyM2IzOS05ZjY2LTRmMjctYjdjMS01MDUyZjMxYzRjM2UiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "selfhostedonpremIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
