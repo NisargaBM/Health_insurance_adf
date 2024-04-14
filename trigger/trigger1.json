@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "pl_control",
+					"referenceName": "pl_control_master",
 					"type": "PipelineReference"
 				}
 			}
