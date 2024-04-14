@@ -73,14 +73,67 @@
 										"typeProperties": {
 											"source": {
 												"type": "SqlServerSource",
+												"sqlReaderQuery": {
+													"value": "@if(\n  equals(\n    toLower(\n      item().Load_Type\n    ), \n    'incremental'\n  ), \n  concat(\n    'SELECT MAX(', \n    item().Watermark_column, \n    ') AS Watermark_Value FROM [', \n    item().Source_Object_Schema, \n    '].', \n    item().Source_Object_Name\n  ), \n  'SELECT NULL AS Watermark_Value'\n)\n",
+													"type": "Expression"
+												},
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
 											"dataset": {
 												"referenceName": "SqlServerTable6",
+												"type": "DatasetReference",
+												"parameters": {
+													"Schema": {
+														"value": "@item().Source_Object_Schema",
+														"type": "Expression"
+													},
+													"TableName": {
+														"value": "@item().Source_Object_Name",
+														"type": "Expression"
+													}
+												}
+											},
+											"firstRowOnly": false
+										}
+									},
+									{
+										"name": "Copy-Table",
+										"type": "Copy",
+										"dependsOn": [
+											{
+												"activity": "Lookup2",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"source": {
+												"type": "SqlServerSource",
+												"sqlReaderQuery": {
+													"value": "concat('Select * from ' ,item().Source_Object_Schema,'.',item().Source_Object_Name,' where ',item().watermark_column,'>',item().watermark_value)))\n",
+													"type": "Expression"
+												},
+												"queryTimeout": "02:00:00",
+												"partitionOption": "None"
+											},
+											"enableStaging": false
+										},
+										"inputs": [
+											{
+												"referenceName": "SqlServerTable7",
 												"type": "DatasetReference"
 											}
-										}
+										]
 									}
 								]
 							}
