@@ -169,10 +169,6 @@
 													"Schema": {
 														"value": "@item().Target_location",
 														"type": "Expression"
-													},
-													"TableNam": {
-														"value": "@item().Target_Object_Name",
-														"type": "Expression"
 													}
 												}
 											}
