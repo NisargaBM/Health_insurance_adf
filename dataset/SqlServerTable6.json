@@ -1,0 +1,20 @@
+{
+	"name": "SqlServerTable6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_supchain",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Schema": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	}
+}
