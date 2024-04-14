@@ -1,0 +1,24 @@
+{
+	"name": "SqlServerTable1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_onpremise_sqlserver",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"p_fact": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().p_fact",
+				"type": "Expression"
+			}
+		}
+	}
+}

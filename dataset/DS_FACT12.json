@@ -1,0 +1,32 @@
+{
+	"name": "DS_FACT12",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_nisarga_project_adlsgen2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"P_FactTableNames": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().P_FactTableNames",
+					"type": "Expression"
+				},
+				"folderPath": "Fact F",
+				"fileSystem": "inputbackup"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": ""
+		},
+		"schema": []
+	}
+}

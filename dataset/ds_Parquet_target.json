@@ -1,0 +1,34 @@
+{
+	"name": "ds_Parquet_target",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_nisarga_project_adlsgen2",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Target_location": {
+				"type": "string"
+			},
+			"Target_object_name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Target_object_name",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().Target_location",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
