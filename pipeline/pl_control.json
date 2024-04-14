@@ -166,17 +166,118 @@
 												"referenceName": "ds_Parquet_target",
 												"type": "DatasetReference",
 												"parameters": {
-													"Schema": {
+													"Target_location": {
 														"value": "@item().Target_location",
 														"type": "Expression"
 													},
-													"TableName": {
+													"Target_object_name": {
 														"value": "@item().Target_Object_Name",
 														"type": "Expression"
 													}
 												}
 											}
 										]
+									},
+									{
+										"name": "UpdateWatermark",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Copy-Table",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[sp_UpdateWatermark]",
+											"storedProcedureParameters": {
+												"Source_Object_Name": {
+													"value": {
+														"value": "@item().Source_Object_Name\n",
+														"type": "Expression"
+													}
+												},
+												"Watermark_column": {
+													"value": {
+														"value": "@item().Watermark_column\n",
+														"type": "Expression"
+													}
+												},
+												"watermark_value": {
+													"value": {
+														"value": "@activity('Lookup2').output.value[0].watermark_value",
+														"type": "Expression"
+													}
+												}
+											}
+										},
+										"linkedServiceName": {
+											"referenceName": "AzureSqlDatabasesc",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Stored procedure Success",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Copy-Table",
+												"dependencyConditions": [
+													"Succeeded"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[sp_UpdateLogTable]"
+										},
+										"linkedServiceName": {
+											"referenceName": "AzureSqlDatabasesc",
+											"type": "LinkedServiceReference"
+										}
+									},
+									{
+										"name": "Stored procedure Failure",
+										"type": "SqlServerStoredProcedure",
+										"dependsOn": [
+											{
+												"activity": "Copy-Table",
+												"dependencyConditions": [
+													"Failed"
+												]
+											}
+										],
+										"policy": {
+											"timeout": "0.12:00:00",
+											"retry": 0,
+											"retryIntervalInSeconds": 30,
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"storedProcedureName": "[dbo].[sp_UpdateErrorTable]"
+										},
+										"linkedServiceName": {
+											"referenceName": "AzureSqlDatabasesc",
+											"type": "LinkedServiceReference"
+										}
 									}
 								]
 							}

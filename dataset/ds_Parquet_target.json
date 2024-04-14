@@ -6,10 +6,10 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"Schema": {
+			"Target_location": {
 				"type": "string"
 			},
-			"TableName": {
+			"Target_object_name": {
 				"type": "string"
 			}
 		},
@@ -18,7 +18,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "output"
+				"fileName": {
+					"value": "@dataset().Target_object_name",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().Target_location",
+					"type": "Expression"
+				}
 			},
 			"compressionCodec": "snappy"
 		},
