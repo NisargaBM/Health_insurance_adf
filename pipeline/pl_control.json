@@ -120,18 +120,61 @@
 											"source": {
 												"type": "SqlServerSource",
 												"sqlReaderQuery": {
-													"value": "concat('Select * from ' ,item().Source_Object_Schema,'.',item().Source_Object_Name,' where ',item().watermark_column,'>',item().watermark_value)))\n",
+													"value": "@concat('Select * from ' ,item().Source_Object_Schema,'.',item().Source_Object_Name,' where ',item().watermark_column,'>',item().watermark_value)\n",
 													"type": "Expression"
 												},
 												"queryTimeout": "02:00:00",
 												"partitionOption": "None"
 											},
-											"enableStaging": false
+											"sink": {
+												"type": "ParquetSink",
+												"storeSettings": {
+													"type": "AzureBlobFSWriteSettings"
+												},
+												"formatSettings": {
+													"type": "ParquetWriteSettings"
+												}
+											},
+											"enableStaging": false,
+											"translator": {
+												"type": "TabularTranslator",
+												"typeConversion": true,
+												"typeConversionSettings": {
+													"allowDataTruncation": true,
+													"treatBooleanAsNumber": false
+												}
+											}
 										},
 										"inputs": [
 											{
 												"referenceName": "SqlServerTable7",
-												"type": "DatasetReference"
+												"type": "DatasetReference",
+												"parameters": {
+													"Schema": {
+														"value": "@item().Source_Object_Schema",
+														"type": "Expression"
+													},
+													"TableName": {
+														"value": "@item().Source_Object_Name\n",
+														"type": "Expression"
+													}
+												}
+											}
+										],
+										"outputs": [
+											{
+												"referenceName": "ds_Parquet_target",
+												"type": "DatasetReference",
+												"parameters": {
+													"Schema": {
+														"value": "@item().Target_location",
+														"type": "Expression"
+													},
+													"TableNam": {
+														"value": "@item().Target_Object_Name",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									}
